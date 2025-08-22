@@ -4,7 +4,7 @@ task.spawn(function()
     repeat task.wait() until game:IsLoaded()
     local p = game:GetService("Players").LocalPlayer
     p.DescendantAdded:Connect(function(c)
-        if c.名字 == "Chat" and c.Parent == p:WaitForChild("PlayerGui") then
+        if c.Name == "Chat" and c.Parent == p:WaitForChild("PlayerGui") then
             Chat = c
         end
     end)
@@ -33,13 +33,13 @@ old = hookmetamethod(game, "__namecall", function(self, ...)
     if (method:lower() == "togglefullscreen" and self == game:GetService("GuiService")) and checkcaller() then
         return nil
     end
-    if (method:lower() == "capturefocus" and self.名字 == "ChatBar") and checkcaller() then
+    if (method:lower() == "capturefocus" and self.Name == "ChatBar") and checkcaller() then
         return nil
     end
-    if (method:lower() == "releasefocus" and self.名字 == "ChatBar") and checkcaller() then
+    if (method:lower() == "releasefocus" and self.Name == "ChatBar") and checkcaller() then
         return nil
     end
-    if (method:lower() == "fireserver" and self.名字:lower() == "saymessagerequest") and checkcaller() then
+    if (method:lower() == "fireserver" and self.Name:lower() == "saymessagerequest") and checkcaller() then
         return nil
     end
     if (method:lower() == "chat" and self == game:GetService("Players")) and checkcaller() then
@@ -73,7 +73,7 @@ old = hookfunction(keypress, newcclosure(function(...)
             end
             for i,v in pairs(pressed) do
                 if table.find(pressed, v) then
-                    table.移除(pressed, i)
+                    table.remove(pressed, i)
                 end
             end
             return error()
@@ -88,7 +88,7 @@ hook3 = hookfunction(getnilinstances, newcclosure(function(...)
         cd = true
         local tc = {}
         for _,v in pairs(getnilinstances()) do
-            if v.名字 ~= script.名字 then table.insert(tc, v) end
+            if v.Name ~= script.Name then table.insert(tc, v) end
         end
         cd = false
         return tc
